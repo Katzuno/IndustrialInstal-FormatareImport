@@ -96,15 +96,15 @@ if __name__ == "__main__":
         if case == "gasit_companie":
             if is_value_no_tva(precedent):# Transmit precedentul pentru a verifica daca este companie
                 value_no_tva = (elem,)#Poate fi si cu precedent = produs
-
             if is_value_no_tva(second_precedent):# Second_precedent trebuie sa fie companie / produs pentru a identifica campul curent drept valoare TVA
                 tva = (elem,)
-
             if is_value_no_tva(third_precedent): # Third_precedent trebuie sa fie companie / produs pentru a identifica campul curent drept valoare cu TVA
                 value_with_tva = (elem,)
-
             if is_value_no_tva(fourth_precedent): # Fourth_precedent trebuie sa fie companie / produs pentru a identifica campul curent drept COST
-                cost = (elem,)
+                temp = elem[:-1]
+                temp = float(temp)
+                cost = (temp,)
+
         elif case == "gasit_produs":
             if is_product(second_precedent):# Transmit second_precedent pentru a verifica daca este valoare TVA, daca da PRECEDENTUL este produs, deci curentul este cantitate
                 quantity = (elem,)
