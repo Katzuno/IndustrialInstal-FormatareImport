@@ -4,7 +4,7 @@ import math
 
 
 document_prefix = 'FA'
-procent_tva = '19'
+procent_tva = ['24']
 company_sufix = 'SRL'
 
 def format_csv(input = 'JurnalVanzari.csv', output = 'Output.csv'):
@@ -55,7 +55,12 @@ def is_value_no_tva(precedent):
     return False
 
 def is_product(precedent):
-    if precedent == procent_tva:
+    if (not isFloat(precedent)) and precedent in procent_tva:
+        return True
+    return False
+
+def isFloat(string):
+    if string[-3:] == '.00':
         return True
     return False
 
@@ -106,7 +111,7 @@ if __name__ == "__main__":
                 cost = (temp,)
 
         elif case == "gasit_produs":
-            if is_product(second_precedent):# Transmit second_precedent pentru a verifica daca este valoare TVA, daca da PRECEDENTUL este produs, deci curentul este cantitate
+            if isFloat(elem) and is_product(second_precedent):# Transmit second_precedent pentru a verifica daca este valoare TVA, daca da PRECEDENTUL este produs, deci curentul este cantitate
                 quantity = (elem,)
             if is_product(third_precedent): # Transmit THIRD_PRECEDENT pentru a verifica daca este valoare TVA, daca da SECOND_PRECEDENT este produs, deci curentul este valoare pret unitar
                 product_pret_unitar = (elem,)
